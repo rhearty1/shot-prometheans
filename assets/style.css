@@ -432,3 +432,16 @@ ol.questions b{color:var(--ink);font-weight:700}
   ol.questions li{padding-left:2.4rem}
   ol.questions li::before{left:0;top:1.6rem;font-size:1.1rem}
 }
+
+/* ---------- resource links under a paper ---------- */
+
+.reslinks{
+  display:block;
+  margin-top:.45rem;
+  font-size:.85rem;
+  line-height:1.6;
+  color:var(--ink-faint);
+}
+.reslinks a{color:var(--navy);text-decoration:none;border-bottom:1px solid var(--rule)}
+.reslinks a:hover{color:var(--orange);border-bottom-color:var(--orange)}
+ol.archive .detail a,.prose a{color:var(--navy)}
