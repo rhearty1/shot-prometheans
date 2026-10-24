@@ -1,0 +1,434 @@
+/* Prometheans SIG — shared stylesheet.
+   Palette and typography matched to the Society for the History of Technology:
+     page      #F3F8FB   text     #2B3038   muted   #6F7683
+     navy      #09347A   orange   #F4911E   white   #FFFFFF
+   SHOT sets headings in Playfair Display at regular weight and body text in
+   Proxima Nova. Playfair Display is free on Google Fonts and is used here as-is.
+   Proxima Nova is a licensed Adobe font, so Mulish stands in for it — the nearest
+   free humanist sans — above SHOT's own helvetica/arial fallbacks. If the Society
+   shares its Typekit kit, swap --sans for: proxima-nova, helvetica, arial, sans-serif.
+
+   Spacing scale: 1.5 / 2.5 / 4 / 5 / 6.5 rem. Only one heavy rule on the page,
+   under the masthead; everything else is a hairline or plain space. */
+
+:root{
+  --paper:#F3F8FB;
+  --surface:#FFFFFF;
+  --ink:#2B3038;
+  --ink-soft:#6F7683;
+  --ink-faint:#8A93A1;
+  --navy:#09347A;
+  --orange:#F4911E;
+  --rule:#D7E3EE;
+  --rule-soft:#E9EFF5;
+  --serif:"Playfair Display",Georgia,"Times New Roman",serif;
+  --sans:"Mulish",helvetica,arial,sans-serif;
+  --measure:36rem;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0D1420;
+    --surface:#141C2B;
+    --ink:#E4EAF2;
+    --ink-soft:#9FABBD;
+    --ink-faint:#78859A;
+    --navy:#93B4E4;
+    --orange:#F4A742;
+    --rule:#243149;
+    --rule-soft:#1C2639;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0D1420;
+  --surface:#141C2B;
+  --ink:#E4EAF2;
+  --ink-soft:#9FABBD;
+  --ink-faint:#78859A;
+  --navy:#93B4E4;
+  --orange:#F4A742;
+  --rule:#243149;
+  --rule-soft:#1C2639;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.875;
+  -webkit-font-smoothing:antialiased;
+}
+
+.wrap{
+  max-width:50rem;
+  margin:0 auto;
+  padding:0 16px 7rem;
+}
+
+/* ---------- masthead ---------- */
+
+.masthead{
+  border-bottom:2px solid var(--orange);
+  margin-bottom:5rem;
+  padding:4.5rem 0 1.75rem;
+}
+.wordmark{
+  display:inline-block;
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(2.2rem,6.5vw,3.1rem);
+  line-height:1;
+  color:var(--navy);
+  text-decoration:none;
+}
+.wordmark:hover{color:var(--ink)}
+.wordmark .flame{color:var(--orange)}
+nav.years{
+  margin-top:1.75rem;
+  display:flex;
+  flex-wrap:wrap;
+  gap:1.75rem;
+  font-size:.95rem;
+  line-height:1.4;
+}
+nav.years a{
+  color:var(--navy);
+  text-decoration:none;
+  padding-bottom:.3rem;
+  border-bottom:2px solid transparent;
+}
+nav.years a:hover{border-bottom-color:var(--rule)}
+nav.years a[aria-current="page"]{border-bottom-color:var(--orange);font-weight:600}
+
+/* ---------- page head ---------- */
+
+.phead{margin-bottom:5rem}
+h1{
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(2.4rem,6.5vw,3.6rem);
+  line-height:1.12;
+  color:var(--navy);
+  margin:0 0 1.5rem;
+  text-wrap:balance;
+}
+.standfirst{
+  font-size:1.1rem;
+  line-height:1.8;
+  color:var(--ink-soft);
+  max-width:var(--measure);
+  margin:0;
+}
+
+/* ---------- figure strip ---------- */
+
+.figures{
+  display:flex;
+  flex-wrap:wrap;
+  margin:4rem 0 0;
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+}
+.figures div{
+  flex:1 1 7rem;
+  padding:1.75rem 1.5rem 1.75rem 0;
+}
+.figures b{
+  display:block;
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:2.5rem;
+  line-height:1;
+  color:var(--navy);
+}
+.figures span{
+  display:block;
+  margin-top:.55rem;
+  font-size:.72rem;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  font-weight:600;
+  line-height:1.4;
+}
+
+/* ---------- prose ---------- */
+
+.prose{max-width:var(--measure)}
+.prose p{margin:0 0 1.2em}
+h2{
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:1.8rem;
+  line-height:1.25;
+  color:var(--ink);
+  margin:5rem 0 2rem;
+}
+
+/* ---------- session list ---------- */
+
+ol.sessions{list-style:none;counter-reset:sess;margin:4rem 0 0;padding:0}
+li.session{
+  counter-increment:sess;
+  position:relative;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  padding:2.5rem 2.5rem 2.5rem 5rem;
+  margin-bottom:1.25rem;
+}
+li.session:last-child{margin-bottom:0}
+li.session::before{
+  content:counter(sess,decimal-leading-zero);
+  position:absolute;
+  left:2.5rem;
+  top:3.1rem;
+  font-family:var(--serif);
+  font-size:1.4rem;
+  font-weight:400;
+  color:var(--orange);
+  line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.when{
+  font-size:.73rem;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  font-weight:600;
+  margin:0 0 .7rem;
+  line-height:1.5;
+}
+li.session h3{
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:1.6rem;
+  line-height:1.28;
+  color:var(--navy);
+  margin:0 0 1.75rem;
+  text-wrap:balance;
+}
+.badge{
+  display:inline-block;
+  font-family:var(--sans);
+  font-size:.65rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:700;
+  color:#FFFFFF;
+  background:var(--orange);
+  padding:.3rem .55rem;
+  vertical-align:.32em;
+  margin-left:.6rem;
+  white-space:nowrap;
+  line-height:1.2;
+}
+ul.papers{list-style:none;margin:0;padding:0}
+ul.papers li{
+  padding:1.4rem 0;
+  border-top:1px solid var(--rule-soft);
+  line-height:1.6;
+}
+ul.papers li:first-child{border-top:none;padding-top:0}
+ul.papers li:last-child{padding-bottom:0}
+.who{
+  display:block;
+  font-weight:700;
+  font-size:.95rem;
+  color:var(--ink);
+}
+.who + .who{margin-top:.05rem}
+.aff{font-size:.85rem;font-weight:400;color:var(--ink-faint)}
+.paper{
+  display:block;
+  font-size:.97rem;
+  line-height:1.65;
+  color:var(--ink-soft);
+  margin-top:.45rem;
+}
+
+/* ---------- year index ---------- */
+
+.yearlist{list-style:none;margin:0;padding:0}
+.yearlist li{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  margin-bottom:1.25rem;
+}
+.yearlist li:last-child{margin-bottom:0}
+a.yearrow{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:.3rem 2rem;
+  padding:2rem 2.5rem;
+  text-decoration:none;
+  color:inherit;
+}
+a.yearrow:hover{background:var(--paper)}
+a.yearrow .yr{
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:2.2rem;
+  line-height:1;
+  color:var(--navy);
+  min-width:5rem;
+}
+a.yearrow .yd b{display:block;font-size:1.05rem;font-weight:700;line-height:1.5}
+a.yearrow .yd span{display:block;font-size:.9rem;color:var(--ink-faint);line-height:1.5}
+.yearlist li.pending{padding:2rem 2.5rem;color:var(--ink-faint)}
+.yearlist li.pending .yr{
+  font-family:var(--serif);font-weight:400;font-size:2.2rem;line-height:1;
+  color:var(--ink-faint);display:inline-block;min-width:5rem;vertical-align:baseline;
+}
+
+/* ---------- footer ---------- */
+
+footer{
+  margin-top:6.5rem;
+  padding-top:2rem;
+  border-top:1px solid var(--rule);
+  font-size:.9rem;
+  line-height:1.75;
+  color:var(--ink-faint);
+  max-width:var(--measure);
+}
+footer p{margin:0 0 .7em}
+footer p:last-child{margin-bottom:0}
+a{color:var(--navy)}
+a:hover{color:var(--orange)}
+
+@media (max-width:34rem){
+  .masthead{padding-top:3rem;margin-bottom:3.5rem}
+  .phead{margin-bottom:3.5rem}
+  h2{margin:3.5rem 0 1.5rem}
+  ol.sessions{margin-top:3rem}
+  li.session{padding:1.75rem 1.5rem 1.75rem 3.6rem}
+  li.session::before{left:1.4rem;top:2.35rem;font-size:1.2rem}
+  li.session h3{margin-bottom:1.25rem}
+  .figures{margin-top:3rem}
+  .figures div{flex-basis:5.5rem;padding:1.4rem 1rem 1.4rem 0}
+  .figures b{font-size:2rem}
+  a.yearrow,.yearlist li.pending{padding:1.5rem}
+  footer{margin-top:4rem}
+}
+
+/* ---------- home entry points ---------- */
+
+ul.entries{list-style:none;margin:0;padding:0}
+ul.entries li{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  margin-bottom:1.25rem;
+}
+ul.entries li:last-child{margin-bottom:0}
+ul.entries a{
+  display:block;
+  padding:2rem 2.5rem;
+  text-decoration:none;
+  color:inherit;
+}
+ul.entries a:hover{background:var(--paper)}
+ul.entries b{
+  display:block;
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:1.5rem;
+  line-height:1.25;
+  color:var(--navy);
+  margin-bottom:.6rem;
+}
+ul.entries span{
+  display:block;
+  font-size:.95rem;
+  line-height:1.7;
+  color:var(--ink-soft);
+  max-width:34rem;
+}
+
+/* ---------- working group archive ---------- */
+
+ol.archive{list-style:none;margin:0;padding:0}
+ol.archive li{
+  padding:1.9rem 0;
+  border-top:1px solid var(--rule);
+}
+ol.archive li.yrmark{
+  border-top:none;
+  padding:3rem 0 .5rem;
+  font-family:var(--serif);
+  font-size:1.7rem;
+  line-height:1;
+  color:var(--orange);
+}
+ol.archive li.yrmark:first-child{padding-top:0}
+ol.archive li.yrmark + li{border-top:1px solid var(--rule)}
+ol.archive h3{
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:1.35rem;
+  line-height:1.3;
+  color:var(--navy);
+  margin:0 0 .6rem;
+  text-wrap:balance;
+}
+ol.archive .detail{
+  margin:0;
+  font-size:.97rem;
+  line-height:1.7;
+  color:var(--ink-soft);
+  max-width:var(--measure);
+}
+
+@media (max-width:34rem){
+  ul.entries a{padding:1.5rem}
+  ol.archive li{padding:1.5rem 0}
+  ol.archive li.yrmark{padding:2.25rem 0 .4rem}
+}
+
+/* ---------- panel chair line and emergent questions ---------- */
+
+.chairline{
+  margin:-1.25rem 0 1.5rem;
+  font-size:.88rem;
+  line-height:1.6;
+  color:var(--ink-faint);
+}
+ol.questions{
+  list-style:none;
+  counter-reset:q;
+  margin:1.5rem 0 0;
+  padding:0;
+}
+ol.questions li{
+  counter-increment:q;
+  position:relative;
+  padding:1.5rem 0 1.5rem 3.25rem;
+  border-top:1px solid var(--rule);
+  font-size:.97rem;
+  line-height:1.7;
+  color:var(--ink-soft);
+  max-width:40rem;
+}
+ol.questions li:last-child{border-bottom:1px solid var(--rule)}
+ol.questions li::before{
+  content:counter(q);
+  position:absolute;
+  left:.6rem;
+  top:1.85rem;
+  font-family:var(--serif);
+  font-size:1.3rem;
+  line-height:1;
+  color:var(--orange);
+}
+ol.questions b{color:var(--ink);font-weight:700}
+
+@media (max-width:34rem){
+  ol.questions li{padding-left:2.4rem}
+  ol.questions li::before{left:0;top:1.6rem;font-size:1.1rem}
+}
